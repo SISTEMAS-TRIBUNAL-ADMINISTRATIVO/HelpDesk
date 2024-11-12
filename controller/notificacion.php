@@ -7,6 +7,7 @@
     /* opciones del controlador */
     switch($_GET["op"]){
 
+        //Verificar el codigo 
         /* Mostrar en formato JSON segun usu_id */
         case "mostrar";
             $datos=$notificacion->get_notificacion_x_usu($_POST["usu_id"]); 
