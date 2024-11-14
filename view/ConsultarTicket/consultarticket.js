@@ -213,25 +213,41 @@ function CambiarEstado(tick_id){
         }
     });
 }
-
-$(document).on("click","#btnfiltrar", function(){ //filtrado de consulta tickets
+$(document).on("click", "#btnfiltrar", function() {
+    console.log("Filtro activado");
     limpiar();
-
     var tick_titulo = $('#tick_titulo').val();
     var cat_id = $('#cat_id').val();
-
-    listardatatable(tick_titulo,cat_id);
-
+    console.log("Título: ", tick_titulo, "Categoría ID: ", cat_id);
+    listardatatable(tick_titulo, cat_id);
 });
 
-$(document).on("click","#btntodo", function(){ //Boton para regresar a todos los tickets
+$(document).on("click", "#btntodo", function() {
+    console.log("Botón para todos los tickets activado");
     limpiar();
-
     $('#tick_titulo').val('');
     $('#cat_id').val('').trigger('change');
-
-    listardatatable('','');
+    listardatatable('', '');
 });
+
+//$(document).on("click","#btnfiltrar", function(){ //filtrado de consulta tickets no funciona la accion
+   // limpiar();
+
+    //var tick_titulo = $('#tick_titulo').val();
+    //var cat_id = $('#cat_id').val();
+
+    //listardatatable(tick_titulo,cat_id);
+
+//});
+
+//$(document).on("click","#btntodo", function(){ //Boton para regresar a todos los tickets no funciona la accion
+    //limpiar();
+
+   // $('#tick_titulo').val('');
+   // $('#cat_id').val('').trigger('change');
+
+   // listardatatable('','');
+//});
 
 function listardatatable(tick_titulo,cat_id){
     tabla=$('#ticket_data').dataTable({
