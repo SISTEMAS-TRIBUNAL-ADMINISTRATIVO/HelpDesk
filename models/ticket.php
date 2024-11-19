@@ -311,19 +311,21 @@
                     tm_ticket.tick_descrip,
                     tm_ticket.fech_crea,
                     tm_ticket.usu_asig,
-                    tm_ticket.fech_asig,  
-                    tm_usuario.usu_nom,
-                    tm_usuario.usu_ape,
+                    tm_ticket.fech_asig, 
+                    cat_usuario.nombre,
+                    cat_usuario.paterno,
                     tm_categoria.cat_nom,
                     estatus.descrip_estatus
                    FROM tm_ticket
-                   INNER JOIN tm_categoria ON tm_ticket.cat_id = tm_categoria.cat_id
-                   INNER JOIN tm_usuario ON tm_ticket.usu_id = tm_usuario.usu_id
+                   INNER JOIN tm_categoria ON tm_ticket.cat_id = tm_categoria.cat_id                  
+                   INNER JOIN bd_seguridad_sistemas.cat_usuario ON tm_ticket.usu_id = cat_usuario.enlace                   
                    INNER JOIN estatus ON tm_ticket.fk_estatus = estatus.id_estatus
-                   WHERE tm_ticket.tick_titulo LIKE IFNULL (NULL,'')
-                   OR tm_ticket.cat_id = IFNULL (NULL,4)";
+                   WHERE tm_ticket.tick_titulo LIKE IFNULL (NULL,?)
+                   OR tm_ticket.cat_id = IFNULL (NULL,?)";
 
             $SQL=$conectar->PREPARE($SQL);
+            $SQL->bindValue(1, $tick_titulo);
+            $SQL->bindValue(2, $cat_id);
             $SQL->EXECUTE();
             RETURN $resultado=$SQL->fetchAll();
         }
@@ -331,18 +333,19 @@
         public function get_calendar_all(){
             $conectar= parent::conexion("helpdesk");
             parent::set_names();
-            $sql="SELECT 
-                    tm_ticket.tick_id as id,
-                    concat(tm_usuario.usu_nom,' ',tm_usuario.usu_ape) as title,
-                    tm_ticket.fech_crea as start,
+            $sql="  SELECT 
+                    tm_ticket.tick_id AS id,
+                    CONCAT(cat_usuario.nombre,' ',cat_usuario.paterno) AS title,
+                    tm_ticket.fech_crea AS START,
+                    tm_ticket.fech_cierre AS END,
                     CASE
                         WHEN tm_ticket.fk_estatus = 1 THEN 'green'
                         WHEN tm_ticket.fk_estatus = 2 THEN 'red'
                         ELSE 'white'
-                    END as color
+                    END AS color
                     FROM
                     tm_ticket
-                    INNER join tm_usuario on tm_ticket.usu_id = tm_usuario.usu_id;";
+                    INNER JOIN bd_seguridad_sistemas.cat_usuario ON tm_ticket.usu_id = cat_usuario.enlace";
             $sql=$conectar->prepare($sql);
             $sql->execute();
             return $resultado=$sql->fetchAll();
@@ -353,7 +356,7 @@
             parent::set_names();
             $sql="SELECT 
                     tm_ticket.tick_id as id,
-                    concat(tm_usuario.usu_nom,' ',tm_usuario.usu_ape) as title,
+                    CONCAT(cat_usuario.nombre,' ',cat_usuario.paterno) AS title,
                     tm_ticket.fech_crea as start,
                     CASE
                         WHEN tm_ticket.fk_estatus = 1 THEN 'green'
@@ -362,9 +365,7 @@
                     END as color
                     FROM
                     tm_ticket
-                    INNER join tm_usuario on tm_ticket.usu_id = tm_usuario.usu_id
-                    WHERE
-                    tm_ticket.usu_id=?";
+                    INNER JOIN bd_seguridad_sistemas.cat_usuario ON tm_ticket.usu_id = cat_usuario.enlace";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_id);
             $sql->execute();

@@ -164,8 +164,10 @@
 
         case "listar_filtro":
             $datos=$ticket->filtrar_ticket($_POST["tick_titulo"],$_POST["cat_id"]);
+
             $data= Array();
-            foreach($datos as $row){
+            foreach($datos as $row)
+            {
                 $sub_array = array();
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["cat_nom"];
@@ -173,7 +175,7 @@
 
                 //$sub_array[] = $row["prio_nom"];
 
-                if ($row["descrip_estatus"]=="Abierto"){ //si le pongo fk_estatus si queda pero me salen los tickets cerrados
+                if ($row["descrip_estatus"]=="Activo"){ 
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
                     $sub_array[] = '<a onClick="CambiarEstado('.$row["tick_id"].')"><span class="label label-pill label-danger">Cerrado</span><a>';
@@ -187,20 +189,19 @@
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_asig"]));
                 }
 
-                /*if($row["fech_cierre"]==null){
-                    $sub_array[] = '<span class="label label-pill label-default">Sin Cerrar</span>';
-                }else{
-                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
-                }*/
 
                 if($row["usu_asig"]==null){
                     $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"><span class="label label-pill label-warning">Sin Asignar</span></a>';
                 }else{
                     $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                     foreach($datos1 as $row1){
-                        $sub_array[] = '<span class="label label-pill label-success">'. $row1["usu_nom"].'</span>';
+                        $sub_array[] = '<span class="label label-pill label-success">'. $row1["nombre"].'</span>';
                     }
                 }
+
+                $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+
+                $data[] = $sub_array;
             }
 
             $results = array(
@@ -408,12 +409,12 @@
         case "all_calendar":
             $datos=$ticket->get_calendar_all();
             echo json_encode($datos);
-            break;
+        break;
 
         case "usu_calendar":
             $datos=$ticket->get_calendar_usu($_POST["usu_id"]);
             echo json_encode($datos);
-            break;
+        break;
 
     }
 ?>

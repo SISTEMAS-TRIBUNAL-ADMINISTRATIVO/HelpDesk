@@ -56,7 +56,7 @@ if (isset($_SESSION["Enlace"])) {
 
               <div class="col-lg-6">
                 <fieldset class="form-group">
-                  <label class="form-label semibold" for="cat_nom">SubCategoria</label>
+                  <label class="form-label semibold" for="cats_nom">SubCategoria</label>
                   <input type="text" class="form-control" id="cats_nom" name="cats_nom" readonly>
                 </fieldset>
               </div>

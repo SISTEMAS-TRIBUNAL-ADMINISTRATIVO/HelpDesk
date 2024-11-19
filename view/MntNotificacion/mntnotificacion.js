@@ -60,5 +60,5 @@ $(document).ready(function(){
 
 /* TODO: Funcion para abrir detalle de ticket en una nueva ventana */
 function ver(tick_id){
-    window.open('http://192.168.1.121:80/sistema_helpdesk/view/DetalleTicket/?ID='+ tick_id +'');
+    window.open('http://localhost:80/sistema_helpdesk/view/DetalleTicket/?ID='+ tick_id +'');
 }

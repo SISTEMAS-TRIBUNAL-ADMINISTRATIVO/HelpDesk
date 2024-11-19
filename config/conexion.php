@@ -4,7 +4,7 @@
     class Conectar
 {
     protected $dbh;
-    protected $configMysql = "Production";
+    protected $configMysql = "Local";
     
     
     protected function Conexion($db)
@@ -53,7 +53,7 @@
 
     public function ruta()
     {
-        return "http://192.168.1.121/sistema_helpdesk/";
+        return "http://localhost/HelpDesk/";
     }
 }
 ?>

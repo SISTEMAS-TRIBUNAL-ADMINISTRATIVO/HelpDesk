@@ -37,7 +37,7 @@ function init(){
 
         $.post("../../controller/subcategoria.php?op=combo",{cat_id : cat_id},function(data, status){
             $('#cats_id').html(data);
-            console.log(data);
+            //console.log(data);
         });
 
     });

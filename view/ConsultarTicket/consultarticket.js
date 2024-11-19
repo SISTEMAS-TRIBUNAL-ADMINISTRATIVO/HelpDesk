@@ -213,12 +213,14 @@ function CambiarEstado(tick_id){
         }
     });
 }
+
 $(document).on("click", "#btnfiltrar", function() {
     console.log("Filtro activado");
     limpiar();
     var tick_titulo = $('#tick_titulo').val();
     var cat_id = $('#cat_id').val();
-    console.log("Título: ", tick_titulo, "Categoría ID: ", cat_id);
+
+    //console.log("Título: ", tick_titulo, "Categoría ID: ", cat_id);
     listardatatable(tick_titulo, cat_id);
 });
 
@@ -227,27 +229,8 @@ $(document).on("click", "#btntodo", function() {
     limpiar();
     $('#tick_titulo').val('');
     $('#cat_id').val('').trigger('change');
-    listardatatable('', '');
+    listardatatableTodos();
 });
-
-//$(document).on("click","#btnfiltrar", function(){ //filtrado de consulta tickets no funciona la accion
-   // limpiar();
-
-    //var tick_titulo = $('#tick_titulo').val();
-    //var cat_id = $('#cat_id').val();
-
-    //listardatatable(tick_titulo,cat_id);
-
-//});
-
-//$(document).on("click","#btntodo", function(){ //Boton para regresar a todos los tickets no funciona la accion
-    //limpiar();
-
-   // $('#tick_titulo').val('');
-   // $('#cat_id').val('').trigger('change');
-
-   // listardatatable('','');
-//});
 
 function listardatatable(tick_titulo,cat_id){
     tabla=$('#ticket_data').dataTable({
@@ -303,6 +286,61 @@ function listardatatable(tick_titulo,cat_id){
         }     
     }).DataTable().ajax.reload();
 }
+
+function listardatatableTodos(){
+    tabla=$('#ticket_data').dataTable({
+        "aProcessing": true,
+        "aServerSide": true,
+        dom: 'Bfrtip',
+        "searching": true,
+        lengthChange: false,
+        colReorder: true,
+        buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+                ],
+        "ajax":{
+            url: '../../controller/ticket.php?op=listar',
+            type : "post",
+            dataType : "json",
+            error: function(e){
+                console.log(e.responseText);
+            }
+        },
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo":true,
+        "iDisplayLength": 10,
+        "autoWidth": false,
+        "language": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }     
+    }).DataTable().ajax.reload();
+}
+
 
 function limpiar(){
     $('#table').html(

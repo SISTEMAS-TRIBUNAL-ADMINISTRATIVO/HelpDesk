@@ -64,7 +64,7 @@
         break;
 
         case "total";
-            if( $_SESSION["rol_id"]==0){
+            if( $_SESSION["id_rol"]==3){
                 $datos=$usuario->get_ticket_todos();
             } else{
                 $datos=$usuario->get_usuario_total_x_id($_POST["usu_id"]);  
@@ -80,7 +80,7 @@
         break;
 
         case "totalabierto";
-            if( $_SESSION["rol_id"]==0){
+            if( $_SESSION["id_rol"]==3){
                 $datos=$usuario->get_ticket_abiertotodos();
             } else{
                 $datos=$usuario->get_usuario_totalabierto_x_id($_POST["usu_id"]);
@@ -95,7 +95,7 @@
         break;
 
         case "totalcerrado";
-            if( $_SESSION["rol_id"]==0){
+            if( $_SESSION["id_rol"]==3){
                 $datos=$usuario->get_usuario_totalcerradotodos();
             } else{
                 $datos=$usuario->get_usuario_totalcerrado_x_id($_POST["usu_id"]);

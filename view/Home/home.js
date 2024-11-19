@@ -6,12 +6,12 @@ $(document).ready(function(){
     var usu_id = $('#user_idx').val();
 
         $.post("../../controller/usuario.php?op=total", {usu_id:usu_id}, function (data) {
-            data = JSON.parse(data);
+           data = JSON.parse(data);
             $('#lbltotal').html(data.TOTAL);
         }); 
     
         $.post("../../controller/usuario.php?op=totalabierto", {usu_id:usu_id}, function (data) {
-            data = JSON.parse(data);
+           data = JSON.parse(data);
             $('#lbltotalabierto').html(data.TOTAL);
         });
     
@@ -34,7 +34,7 @@ $(document).ready(function(){
         }); */
   
         $.post("../../controller/ticket.php?op=grafico",function (data) {  // le muestra al administrador total de ticket abiertos!
-            data = JSON.parse(data);
+           data = JSON.parse(data);
 
             new Morris.Bar({
                 element: 'divgrafico',
@@ -57,7 +57,6 @@ $(document).ready(function(){
                 url:'../../controller/ticket.php?op=all_calendar'
             }
         });
-
 });
 
 init();
