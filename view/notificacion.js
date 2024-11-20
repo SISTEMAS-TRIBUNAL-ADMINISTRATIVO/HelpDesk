@@ -21,9 +21,9 @@ function mostrar_notificacion(){
             }else{
                 data = JSON.parse(data);
                 $.notify({
-                    icon: 'glyphicon glyphicon-star',
+                    icon: 'fa fa-bell',
                     message: data.not_mensaje,
-                    url: "http://localhost:80/sistema_helpdesk/view/DetalleTicket/?ID="+data.tick_id
+                    url: "http://localhost/HelpDesk/view/DetalleTicket/?ID="+data.tick_id
                 });
 
                 $.post("../../controller/notificacion.php?op=actualizar", {not_id : data.not_id}, function (data) {
@@ -37,6 +37,6 @@ function mostrar_notificacion(){
 
 setInterval(function(){
     mostrar_notificacion();
-}, 5000);
+}, 10000);
 
 

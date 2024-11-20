@@ -14,7 +14,21 @@
             {
                 switch ($db) 
                 {
+                    case "seguridad":
+                        $this->dbh = new PDO("mysql:host=localhost;dbname=bd_seguridad_sistemas", "root", "");
+                        break;
 
+                    case "helpdesk":
+                        $this->dbh = new PDO("mysql:host=localhost;dbname=andercode_helpdesk", "root", "");
+                        break;
+
+                    case "siai":
+                        $this->dbh = new PDO("mysql:host=localhost;dbname=siai", "root", "");
+                        break;
+
+                    case "siga":
+                        $this->dbh = new PDO("mysql:host=localhost;dbname=siga_administrativo", "root", '');
+                        break;
                 }
             } else if ($this->configMysql == "Production") 
             {
@@ -29,7 +43,7 @@
                         break;
 
                     case "siai":
-                        $this->dbh = new PDO("mysql:host=127.0.0.1;dbname=siai", "root", "");
+                        $this->dbh = new PDO("mysql:host=192.168.1.225;dbname=siai", "SIAI_USER", "ChiapasInformatica$10");
                         break;
 
                     case "siga":
@@ -51,9 +65,34 @@
         return $this->dbh->query("SET NAMES 'utf8mb4'");
     }
 
-    public function ruta()
+
+
+    public function rutaHelpdesk()
     {
-        return "http://localhost/HelpDesk/";
+        if ($this->configMysql == "Local") 
+        {
+            return "http://localhost/HelpDesk/";
+        }
+        else
+        {
+            return "http://192.168.1.121/HelpDesk/";
+        }
     }
+
+
+    public function rutaPortal()
+    {
+        if ($this->configMysql == "Local") 
+        {
+            return "http://localhost/PortalNuevaVersion/";
+        }
+        else
+        {
+            return "http://192.168.1.121/PortalNuevaVersion/";
+        }
+
+        
+    }
+    
 }
 ?>

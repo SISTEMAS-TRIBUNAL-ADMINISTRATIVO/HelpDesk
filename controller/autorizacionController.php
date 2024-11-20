@@ -35,7 +35,7 @@
                 $_SESSION['IdPadreSistema']=$row['IdPadreSistema'];
             }
             $conexion = new Conectar(); 
-            header("Location:" . $conexion->ruta() . "view/Home/index.php");
+            header("Location:" . $conexion->rutaHelpdesk() . "view/Home/index.php");
         }
         else
         {

@@ -25,6 +25,8 @@
 							<h3>Notificación</h3>
 							<ol class="breadcrumb breadcrumb-simple">
 								<li><a href="#">Home</a></li>
+							
+
 								<li class="active">Notificación</li>
 							</ol>
 						</div>

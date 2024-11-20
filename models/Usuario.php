@@ -45,7 +45,7 @@
             $conectar = parent::conexion("seguridad");
             parent::set_names();
 
-            $PassEncryp = md5($Email) . hash('sha256', $Password);
+            //$PassEncryp = md5($Email) . hash('sha256', $Password);
 
             $sql = "SELECT 
                 id_usuario,
