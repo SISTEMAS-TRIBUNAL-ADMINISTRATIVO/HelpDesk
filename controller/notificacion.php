@@ -23,32 +23,26 @@
     switch ($_GET["op"]) {
         case "mostrar":
             // Obtener la última notificación
-            $datos = $notificacion->get_notificacion_x_usu(150);   
-            if (is_array($datos) && count($datos) > 0) {
-                // Obtener la primera notificación (la más reciente, debido al LIMIT 1)
-                $row = $datos[0]; // El primer registro de la lista
+            $datos = $notificacion->get_notificacion_x_usu($usu_id);   
         
-                // Crear el array de salida para la última notificación
+            // Si no hay resultados
+            if (is_array($datos) && count($datos) > 0) {
+                $row = $datos[0]; // Obtiene la primera (más reciente) notificación
+        
                 $output = array(
                     "not_id" => $row["not_id"],
                     "usu_id" => $row["usu_id"],
-                    "not_mensaje" => $row["not_mensaje"] . ' ' . $row["tick_id"], // El mensaje + ID del ticket
+                    "not_mensaje" => $row["not_mensaje"] . ' ' . $row["tick_id"], // Mensaje + ticket ID
                     "tick_id" => $row["tick_id"]
                 );
         
-                // Debug: Verifica los datos que estás enviando
-                // var_dump($output); exit();  // Puedes usar esto temporalmente para ver los datos
-        
-                // Devolver la última notificación
+                // Asegúrate de que sea una respuesta JSON válida
                 echo json_encode($output);
             } else {
                 // Si no hay notificaciones, responde con un error
-                
+                echo json_encode(["error" => "No se encontraron notificaciones"]);
             }
             break;
-        
-        
-
 
         case "actualizar":
             // Actualizar el estado de la notificación
