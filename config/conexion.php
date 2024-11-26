@@ -15,19 +15,19 @@
                 switch ($db) 
                 {
                     case "seguridad":
-                        $this->dbh = new PDO("mysql:host=localhost;dbname=bd_seguridad_sistemas", "root", "");
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=bd_seguridad_sistemas", "root", "Chiapas2021TA");
                         break;
-
+                        
                     case "helpdesk":
-                        $this->dbh = new PDO("mysql:host=localhost;dbname=andercode_helpdesk", "root", "");
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=andercode_helpdesk", "root", "Chiapas2021TA");
                         break;
 
                     case "siai":
-                        $this->dbh = new PDO("mysql:host=localhost;dbname=siai", "root", "");
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=siai", "root", "Chiapas2021TA");
                         break;
 
                     case "siga":
-                        $this->dbh = new PDO("mysql:host=localhost;dbname=siga_administrativo", "root", '');
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=siga_administrativo", "root", 'Chiapas2021TA');
                         break;
                 }
             } else if ($this->configMysql == "Production") 
