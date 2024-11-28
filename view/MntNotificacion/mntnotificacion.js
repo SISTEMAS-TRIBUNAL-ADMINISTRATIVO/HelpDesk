@@ -59,8 +59,12 @@ $(document).ready(function()
 
 });
 
-/* TODO: Funcion para abrir detalle de ticket en una nueva ventana */
+
 function ver(tick_id,IdNoti)
 {
-    window.open('http://192.168.1.121/HelpDesk/view/DetalleTicket/?ID='+ tick_id +'&IdNoti='+IdNoti+'');
+    $.post("../../controller/URL.php?op=HelpDesk", function (data) 
+    {
+        data = JSON.parse(data);
+        window.open(data.Url_HelpDesk+'/view/DetalleTicket/?ID='+ tick_id +'&IdNoti='+IdNoti+'');
+    });
 }

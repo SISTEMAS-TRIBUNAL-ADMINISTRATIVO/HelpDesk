@@ -71,11 +71,13 @@
     {
         if ($this->configMysql == "Local") 
         {
-            return "http://192.168.1.121/HelpDesk/";
+            return "http://localhost/HelpDesk/";
+            //192.168.1.121
         }
         else
         {
-            return "http://192.168.1.121/HelpDesk/";
+            return "http://localhost/HelpDesk/";
+            //192.168.1.121
         }
     }
 
@@ -84,11 +86,11 @@
     {
         if ($this->configMysql == "Local") 
         {
-            return "http://192.168.1.121/PortalNuevaVersion/";
+            return "http://localhost/PortalNuevaVersion/";
         }
         else
         {
-            return "http://192.168.1.121/PortalNuevaVersion/";
+            return "http://localhost/PortalNuevaVersion/";
         }
     }
     

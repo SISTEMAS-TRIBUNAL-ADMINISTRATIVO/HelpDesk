@@ -8,6 +8,7 @@
     if (isset($_GET['Session_start'])) 
     {
         $datos=$usuario->Autorizacion($_GET['Session_start']);  
+        //$datos=$usuario->Autorizacion($_GET['Session_start']);  
 
         if(is_array($datos)==true and count($datos)>0)
         {

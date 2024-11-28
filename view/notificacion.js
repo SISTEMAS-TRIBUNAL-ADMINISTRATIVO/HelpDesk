@@ -2,6 +2,7 @@ $(document).ready(function() {
     mostrar_notificacion();
 });
 
+
 function mostrar_notificacion() 
 {
     $.ajax({
@@ -27,6 +28,8 @@ function mostrar_notificacion()
                     message: data.not_mensaje,
                     url: "http://192.168.1.121/HelpDesk/view/DetalleTicket/?ID=" + data.tick_id +'&IdNoti='+data.not_id
                 });
+
+                
 
             } catch (e) {
                 // Si ocurre un error al parsear la respuesta, muestra el error
