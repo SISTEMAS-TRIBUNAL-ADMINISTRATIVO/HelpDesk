@@ -23,12 +23,16 @@ function mostrar_notificacion()
                 }
 
                 // Si se encontró una notificación válida
-                $.notify({
-                    icon: 'fa fa-bell',
-                    message: data.not_mensaje,
-                    url: "http://192.168.1.121/HelpDesk/view/DetalleTicket/?ID=" + data.tick_id +'&IdNoti='+data.not_id
+                $.post("../../controller/URL.php?op=HelpDesk", function (data) {
+                    data = JSON.parse(data); // Parse the response
+                
+                    // Show the notification after getting the data
+                    $.notify({
+                        icon: 'fa fa-bell', // Icon for the notification
+                        message: data.not_mensaje, // Message from the response
+                        url: data.Url_HelpDesk + "view/DetalleTicket/?ID=" + data.tick_id + '&IdNoti=' + data.not_id // URL for the notification link
+                    });
                 });
-
                 
 
             } catch (e) {

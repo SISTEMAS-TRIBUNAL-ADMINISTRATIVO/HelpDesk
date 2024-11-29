@@ -65,6 +65,6 @@ $(document).ready(function() {
 function ver(tick_id, IdNoti) {
     $.post("../../controller/URL.php?op=HelpDesk", function (data) {
         data = JSON.parse(data);
-        window.open(data.Url_HelpDesk + '/view/DetalleTicket/?ID=' + tick_id + '&IdNoti=' + IdNoti);
+        window.open(data.Url_HelpDesk + 'view/DetalleTicket/?ID=' + tick_id + '&IdNoti=' + IdNoti);
     });
 }
