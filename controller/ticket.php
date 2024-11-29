@@ -19,13 +19,16 @@
             $tick_titulo = $_POST["tick_titulo"];
             $tick_descrip = $_POST["tick_descrip"];
             $datos = $ticket->insert_ticket($usu_id, $cat_id, $cats_id, $tick_titulo, $tick_descrip);
-            if (is_array($datos)==true and count($datos)>0){
-                foreach ($datos as $row){
+
+            if (is_array($datos)==true and count($datos)>0)
+            {
+                foreach ($datos as $row)
+                {
                     $output["Id"] = $row["Id"];
 
-                    if ($_FILES['files']['name']==0){
+                    if (isset($_FILES['files']) && $_FILES['files']['error'] == 0)
+                    {
 
-                    }else{
                         $countfiles = count($_FILES['files']['name']);
                         $ruta = "../public/document/".$output["Id"]."/";
                         $files_arr = array();

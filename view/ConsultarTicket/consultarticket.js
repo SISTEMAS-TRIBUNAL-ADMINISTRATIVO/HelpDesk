@@ -10,6 +10,15 @@ function init()
 
 $(document).ready(function()
 {
+
+    var Success = getUrlParameter('Success');
+
+    if(Success=='OK')
+    {
+        swal("Correcto!", "Registrado Correctamente", "success");
+    }
+
+
     $.post("../../controller/categoria.php?op=combo",function(data, status){
         $('#cat_id').html(data);
     });
@@ -347,5 +356,20 @@ function limpiar(){
         "</table>"
     );
 }
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
 
 init();

@@ -112,15 +112,14 @@ function guardaryeditar(e){
                 $('#tick_descrip').summernote('reset');
 
                 $('#btnguardar').html('Guardar');
-                $('#btnguardar').prop("enable", true);
+                $('#btnguardar').prop("disabled", false);
 
-                swal("Correcto!", " Ticket Registrado Correctamente", "success");
+                        window.location.href = "../ConsultarTicket?Success=OK"; // Ajusta esta ruta según tu proyecto
 
             }
         });
     }
 }
-
 $(document).ready(function() {
     init();
 });
