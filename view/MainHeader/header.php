@@ -30,7 +30,7 @@
                             <!--<a class="dropdown-item" href="../MntPerfil/"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>-->
                            <!--<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-question-sign"></span>Ayuda</a>-->
                             <!--<div class="dropdown-divider"></div>-->
-                            <a class="dropdown-item" href="../../../PortalNuevaVersion/view/Home/home.php"><span class="font-icon glyphicon glyphicon-log-out"></span>Regresar</a>
+                            <a class="dropdown-item" href="../../../../PortalNuevaVersion/view/Home/home.php"><span class="font-icon glyphicon glyphicon-log-out"></span>Regresar</a>
                         </div>
                     </div>
                 </div>
