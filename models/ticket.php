@@ -400,8 +400,8 @@
                     CONCAT(cat_usuario.nombre,' ',cat_usuario.paterno) AS title,
                     tm_ticket.fech_crea AS start,
                     CASE
-                        WHEN tm_ticket.fk_estatus = 1 THEN 'green'
-                        WHEN tm_ticket.fk_estatus = 2 THEN 'red'
+                        WHEN tm_ticket.fk_estatus = 1 THEN '#A2FEAB'
+                        WHEN tm_ticket.fk_estatus = 2 THEN '#FF8097'
                         ELSE 'white'
                     END AS color
                     FROM
@@ -420,9 +420,9 @@
                     CONCAT(cat_usuario.nombre,' ',cat_usuario.paterno) AS title,
                     tm_ticket.fech_crea as start,
                     CASE
-                        WHEN tm_ticket.fk_estatus = 1 THEN 'green'
-                        WHEN tm_ticket.fk_estatus = 2 THEN 'red'
-                        ELSE 'white'
+                        WHEN tm_ticket.fk_estatus = 1 THEN '#A2FEAB'
+                        WHEN tm_ticket.fk_estatus = 2 THEN '#FF8097'
+                        ELSE '#FFFFFF'
                     END as color
                     FROM
                     tm_ticket
