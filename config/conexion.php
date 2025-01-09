@@ -4,13 +4,34 @@
     class Conectar
 {
     protected $dbh;
-    protected $configMysql = "Production";
+    protected $configMysql = "Local";
     
     
     protected function Conexion($db)
     {
         try {
-            if ($this->configMysql == "Prueba") 
+            if ($this->configMysql == "Local") 
+            {
+                switch ($db) 
+                {
+                    case "seguridad":
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=bd_seguridad_sistemas", "root", "");
+                        break;
+                        
+                    case "helpdesk":
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=andercode_helpdesk", "root", "");
+                        break;
+
+                    case "siai":
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=siai", "root", "");
+                        break;
+
+                    case "siga":
+                        $this->dbh = new PDO("mysql:host=192.168.1.198;dbname=siga_administrativo", "root", '');
+                        break;
+                }
+            }
+            else if ($this->configMysql == "Prueba") 
             {
                 switch ($db) 
                 {
