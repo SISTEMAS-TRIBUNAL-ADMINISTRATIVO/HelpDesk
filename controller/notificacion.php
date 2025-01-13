@@ -36,7 +36,8 @@
                 "not_id" => $row["not_id"],
                 "usu_id" => $row["usu_id"],
                 "not_mensaje" => $row["not_mensaje"] . ' ' . $row["tick_id"],
-                "tick_id" => $row["tick_id"]
+                "tick_id" => $row["tick_id"],
+                "Url_HelpDesk" => $conexion->rutaHelpdesk()
             );
     
             echo json_encode($output);
