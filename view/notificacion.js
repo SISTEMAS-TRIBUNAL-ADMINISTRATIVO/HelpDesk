@@ -16,12 +16,21 @@ function mostrar_notificacion()
                 
                 data = JSON.parse(data);
 
+                // Si no se encontraron notificaciones (error), no hacer nada
+                if (data.error) 
+                {
+                    console.log(data.error);  // Puedes hacer algo con el mensaje de error
+                    return;  // Salimos de la función sin hacer nada
+                }
+
+
                 $.notify({
                     icon: 'fa fa-bell', // Icon for the notification
                     message: data.not_mensaje, // Message from the response
-                    url: data.Url_HelpDesk + "view/DetalleTicket/?ID=" + data.tick_id + '&IdNoti=' + data.not_id // URL for the notification link
+                    url: data.Url_HelpDesk+ "view/DetalleTicket/?ID=" + data.tick_id + '&IdNoti=' + data.not_id // URL for the notification link
                 });
-
+                
+                
             } catch (e) {
                 // Si ocurre un error al parsear la respuesta, muestra el error
                 console.error("Error al parsear la respuesta JSON: ", e);

@@ -236,16 +236,9 @@ function listardetalle(tick_id)
             $.post("../../controller/usuario.php?op=comboUserSoporte", function (data) 
             {
                 $('#usu_asig').html(data);
-            });
-            
-            
-            $.post("../../controller/ticket.php?op=mostrar", {tick_id : tick_id}, function (data) {
-                data = JSON.parse(data);
-                $('#tick_id').val(data.tick_id);
-            
                 $('#mdltitulo').html('Asignar Agente');
+                $('#tick_id').val(data.tick_id);
                 $("#modalasignar").modal('show');
-                $('#usu_asig').val(data.usu_asig).trigger('change');
             });
         }
     });

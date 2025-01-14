@@ -1,4 +1,4 @@
-<?php if ($_SESSION["id_rol"] === 3) : ?>
+<?php if ($_SESSION["id_rol"] == 3) : ?>
    <div id="modalasignar" class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" name="action" id="#" value="add" class="btn btn-rounded btn-primary">Asignar</button>
+                        <button type="submit" name="action" id="btn_asignar" value="add" class="btn btn-rounded btn-primary">Asignar</button>
                     </div>
                 </form>
             </div>

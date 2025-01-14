@@ -5,7 +5,7 @@
     require_once("../models/Usuario.php");
     $notificacion = new Notificacion();
     $usuario = new Usuario();
-
+    $conexion = new Conectar();
 
     // Asegurarse de que el usuario esté autenticado
     if (!isset($_SESSION["Enlace"])) 
