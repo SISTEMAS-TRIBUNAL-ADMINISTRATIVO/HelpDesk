@@ -204,11 +204,13 @@ $(document).on("click","#btnchatgpt", function(){
 
 function listardetalle(tick_id)
 {   
-    $.post("../../controller/ticket.php?op=listardetalle", { tick_id : tick_id }, function (data) {
+    $.post("../../controller/ticket.php?op=listardetalle", { tick_id : tick_id }, function (data) 
+    {
         $('#lbldetalle').html(data);
     });
 
-    $.post("../../controller/ticket.php?op=mostrar", {tick_id : tick_id}, function (datareturn) {
+    $.post("../../controller/ticket.php?op=mostrar", {tick_id : tick_id}, function (datareturn) 
+    {
         
         data = JSON.parse(datareturn);
         $('#lblestado').html(data.lblestado);
@@ -227,9 +229,11 @@ function listardetalle(tick_id)
         }
     });
 
-    $.post("../../controller/ticket.php?op=EstadoTicket", {tick_id : tick_id}, function (datareturn) {
+    $.post("../../controller/ticket.php?op=EstadoTicket", {tick_id : tick_id}, function (datareturn) 
+    {
         
         data = JSON.parse(datareturn);
+        $('#tick_id').val(data.tick_id);
         
         if(data.usu_asig ==null)
         {
@@ -237,7 +241,6 @@ function listardetalle(tick_id)
             {
                 $('#usu_asig').html(data);
                 $('#mdltitulo').html('Asignar Agente');
-                $('#tick_id').val(data.tick_id);
                 $("#modalasignar").modal('show');
             });
         }

@@ -448,6 +448,7 @@
                 foreach($datos as $row)
                 {
                     $output["usu_asig"] = $row["usu_asig"];
+                    $output["tick_id"] = $_POST["tick_id"];
                 }
                 echo json_encode($output); 
             }   
