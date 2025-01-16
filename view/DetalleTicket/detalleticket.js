@@ -189,6 +189,9 @@ $(document).on("click","#btncerrarticket", function(){  //Boton para cerrar el d
                 text: "Ticket Cerrado correctamente.",
                 type: "success",
                 confirmButtonClass: "btn-success"
+            }, function () {
+                console.log("Redirigiendo")
+                window.location.href = "../Reportes/reportes.php";
             });
         }
     });
