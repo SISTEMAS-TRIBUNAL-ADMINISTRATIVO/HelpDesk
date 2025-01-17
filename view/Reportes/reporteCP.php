@@ -77,54 +77,32 @@ if (isset($_SESSION["Enlace"])) {
 
 
 
-            /* Div vacío para simular el espacio antes de la tabla */
-            .space {
-                height: 10mm; 
-            }
-
-
-            /* Estilos de la tabla */
             .table-container {
-                width: 100%;
-                margin-top: 15mm;
-                display: flex;
-                justify-content: center;
+            width: 100%;
+            margin-top: 30mm;
+            display: flex;
+            justify-content: center;
             }
             table {
                 width: 90%;
                 border-collapse: collapse;
-                border: 2px solid #000;
+                border: 2px solid black;
             }
             th, td {
-                border: 1px solid #000;
+                border: 2px solid black;
                 padding: 10px;
                 text-align: center;
                 font-size: 12pt;
             }
-
-            td {
-                vertical-align: middle;
-            }
-
-            /* Estilos para subcolumnas de la fila 3 */
             .sub-table {
                 width: 100%;
                 border-collapse: collapse;
             }
-
             .sub-table td {
                 border: 1px solid black;
                 text-align: center;
                 padding: 5px;
             }
-
-            /* Estilos para casillas de verificación */
-            .checkbox {
-                width: 20px;
-                height: 20px;
-            }
-            
-
         </style>
     </head>
     <body>
@@ -143,32 +121,25 @@ if (isset($_SESSION["Enlace"])) {
             </div>
         </div>
         
-
-        <!-- Espacio vacío de 100mm (10 cm) antes de la tabla -->
-        <div class="space"></div>
-
         <!-- Tabla -->
         <div class="table-container">
             <table>
-                <!-- Fila 1 -->
                 <tr>
                     <td><strong>Tipo de servicio</strong></td>
-                    <td colspan="2"></td> <!-- Columna vacía adicional -->
                 </tr>
-                <!-- Fila 2 -->
                 <tr>
                     <td><strong>Descripción del problema o solicitud</strong></td>
-                    <td colspan="2"></td> <!-- Columna vacía adicional -->
                 </tr>
-                <!-- Fila 4 (nueva) -->
                 <tr>
                     <td><strong>Diagnóstico</strong></td>
-                    <td><strong>¿Se da solución?</strong></td>
-                    <td>
+                    <td colspan="2">
+                        <strong>¿Se da solución?</strong>
                         <table class="sub-table">
                             <tr>
-                                <td><input type="checkbox" class="checkbox"> Sí</td>
-                                <td><input type="checkbox" class="checkbox"> No</td>
+                                <td>Sí</td>
+                                <td></td>
+                                <td>No</td>
+                                <td></td>
                             </tr>
                         </table>
                     </td>
