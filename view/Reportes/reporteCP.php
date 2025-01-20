@@ -17,7 +17,7 @@ if (isset($_SESSION["Enlace"])) {
     ob_start();  // Iniciar captura del contenido HTML
 
     // Ruta de la imagen
-    $imgPath = "../../public/img/Encabezado.png";
+    $imgPath = "../../public/img/Encabezado2025.png";
     
     // Verificar si la imagen se carga correctamente
     $imageData = file_get_contents($imgPath);
@@ -35,7 +35,8 @@ if (isset($_SESSION["Enlace"])) {
         <title>PDF Vacío</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
+                font-family: 'Calibri', sans-serif;
+                font-size: 12pt;
                 margin: 0; 
                 padding: 0;
                 width: 100%;
@@ -77,32 +78,56 @@ if (isset($_SESSION["Enlace"])) {
 
 
 
+            /* Div vacío para simular el espacio antes de la tabla */
+            .space {
+                height: 10mm; 
+            }
+
+
+            /* Estilos de la tabla */
             .table-container {
-            width: 100%;
-            margin-top: 30mm;
-            display: flex;
-            justify-content: center;
+                width: 100%;
+                margin-top: 15mm;
+                display: flex;
+                justify-content: center;
             }
             table {
-                width: 90%;
-                border-collapse: collapse;
-                border: 2px solid black;
+                width: 90%; /* Asegura que no ocupe todo el ancho */
+                margin: auto;
             }
             th, td {
-                border: 2px solid black;
+                border: 1px solid #000;
                 padding: 10px;
                 text-align: center;
                 font-size: 12pt;
             }
-            .sub-table {
+
+           /* Estilos para casillas de verificación */
+            .checkbox {
+                width: 20px;
+                height: 20px;
+            }
+
+
+
+
+            .signatures {
+                position: fixed; /* Fija la posición en el pie de página */
+                bottom: 40mm;    /* Margen desde la parte inferior de la página */
+                left: 0;
                 width: 100%;
-                border-collapse: collapse;
-            }
-            .sub-table td {
-                border: 1px solid black;
                 text-align: center;
-                padding: 5px;
             }
+            .signatures table {
+                width: 90%; /* Asegura que no ocupe todo el ancho */
+                margin: auto;
+            }
+            .signatures td {
+                text-align: center;
+                padding-top: 15mm;
+                font-weight: bold;
+            }
+
         </style>
     </head>
     <body>
@@ -121,31 +146,102 @@ if (isset($_SESSION["Enlace"])) {
             </div>
         </div>
         
+
+        <!-- Espacio vacío de 100mm (10 cm) antes de la tabla -->
+        <div class="space"></div>
+
         <!-- Tabla -->
         <div class="table-container">
             <table>
+
                 <tr>
-                    <td><strong>Tipo de servicio</strong></td>
+                    <td style="vertical-align: top; padding-top: 10px; height: 20%; width: 70%;">Tipo de servicio</td>
+                    <td style="vertical-align: top; padding-top: 10px; width: 40%;">Trabajo realizado</td>
                 </tr>
+
+            </table>
+
+
+            
+        </div>
+
+        <div class="table-container">
+            <table>
+
                 <tr>
-                    <td><strong>Descripción del problema o solicitud</strong></td>
+                    <td style="vertical-align: top; padding-top: 10px; width: 50%; height: 20%;">Descripción del problema o solicitud</td>
+                    <td style="width: 50%; height: 20%;"></td>
                 </tr>
+
+            </table>            
+        </div>
+
+        <div class="table-container">
+            <table>
+
                 <tr>
-                    <td><strong>Diagnóstico</strong></td>
-                    <td colspan="2">
-                        <strong>¿Se da solución?</strong>
+                    <td style="vertical-align: top; padding-top: 10px; width: 50%; height: 20%;">Diagnóstico</td>
+                    <td style="width: 50%; height: 20%;"></td>
+                </tr>
+
+            </table>            
+        </div>
+
+
+        <div class="table-container">
+            <table>
+
+                <tr>
+                    <td style="width: 50%;">¿Se da solución?</td>
+                    <td style="width: 50%;">
                         <table class="sub-table">
                             <tr>
-                                <td>Sí</td>
-                                <td></td>
-                                <td>No</td>
-                                <td></td>
+                                <td style="width: 50%;"><input type="checkbox" class="checkbox"> Sí</td>
+                                <td style="width: 50%;"><input type="checkbox" class="checkbox"> No</td>
                             </tr>
                         </table>
                     </td>
                 </tr>
+
+            </table>            
+        </div>
+
+
+
+        <!-- Firmas -->
+        <div class="signatures">
+            <table>
+                <!-- Fila de títulos -->
+                <tr>
+                    <td style="vertical-align: top; padding-top: 10px;">
+                        Realizo
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                    </td>
+                    <td style="vertical-align: top; padding-top: 10px;">
+                        Valido
+                    </td>
+                    <td style="vertical-align: top; padding-top: 10px;">
+                        De conformidad
+                    </td>
+                </tr>
+                <!-- Fila de líneas para firma -->
+                <tr>
+                    <td style="border-top: 1px solid black; padding-top: 10px;">
+                        Nombre y firma
+                    </td>
+                    <td style="border-top: 1px solid black; padding-top: 10px;">
+                        Nombre y firma
+                    </td>
+                    <td style="border-top: 1px solid black; padding-top: 10px;">
+                        Nombre y firma
+                    </td>
+                </tr>
             </table>
         </div>
+
         
     </body>
     </html>

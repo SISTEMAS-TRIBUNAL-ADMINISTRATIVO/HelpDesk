@@ -17,7 +17,7 @@ if (isset($_SESSION["Enlace"])) {
     ob_start();  // Iniciar captura del contenido HTML
 
     // Ruta de la imagen
-    $imgPath = "../../public/img/Encabezado.png";
+    $imgPath = "../../public/img/Encabezado2025.png";
     
     // Verificar si la imagen se carga correctamente
     $imageData = file_get_contents($imgPath);
@@ -35,7 +35,6 @@ if (isset($_SESSION["Enlace"])) {
         <title>PDF Vacío</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
                 margin: 0; 
                 padding: 0;
                 width: 100%;
@@ -55,28 +54,6 @@ if (isset($_SESSION["Enlace"])) {
             }
 
 
-
-            .info {
-                width: 100%;
-                position: relative;
-                margin-top: 5mm; 
-                font-size: 12pt;
-                font-weight: bold;
-            }
-
-            .left{
-                position: absolute;
-                leftt: 0;
-                padding-left: 10mm;
-            }
-
-            .right {
-                text-align: right;
-                margin-right: 20mm;
-            }
-
-
-
             /* Div vacío para simular el espacio antes de la tabla */
             .space {
                 height: 10mm; 
@@ -91,9 +68,8 @@ if (isset($_SESSION["Enlace"])) {
                 justify-content: center;
             }
             table {
-                width: 90%;
-                border-collapse: collapse;
-                border: 2px solid #000;
+                width: 90%; /* Asegura que no ocupe todo el ancho */
+                margin: auto;
             }
             th, td {
                 border: 1px solid #000;
@@ -101,31 +77,11 @@ if (isset($_SESSION["Enlace"])) {
                 text-align: center;
                 font-size: 12pt;
             }
-
-            td {
-                vertical-align: middle;
-            }
-
-            /* Estilos para subcolumnas de la fila 3 */
-            .sub-table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            .sub-table td {
-                border: 1px solid black;
-                text-align: center;
-                padding: 5px;
-            }
-
-            /* Estilos para casillas de verificación */
-            .checkbox {
-                width: 20px;
-                height: 20px;
-            }
-            
-
         </style>
+
+        
+
+
     </head>
     <body>
         <!-- Encabezado -->
@@ -133,49 +89,48 @@ if (isset($_SESSION["Enlace"])) {
         <img src="data:image/png;base64,<?php echo $imageData; ?>" alt="Encabezado">
         </div>
 
-
-        <!-- Información del documento -->
-        <div class="info">
-            <div class="left">Folio: HS-AI:002/2025</div>
-            <div class="right">
-                Fecha: 15/01/2025 <br>
-                Hora: HR
-            </div>
-        </div>
-        
-
         <!-- Espacio vacío de 100mm (10 cm) antes de la tabla -->
         <div class="space"></div>
 
-        <!-- Tabla -->
         <div class="table-container">
             <table>
-                <!-- Fila 1 -->
                 <tr>
-                    <td><strong>Tipo de servicio</strong></td>
-                    <td colspan="2"></td> <!-- Columna vacía adicional -->
-                </tr>
-                <!-- Fila 2 -->
-                <tr>
-                    <td><strong>Descripción del problema o solicitud</strong></td>
-                    <td colspan="2"></td> <!-- Columna vacía adicional -->
-                </tr>
-                <!-- Fila 4 (nueva) -->
-                <tr>
-                    <td><strong>Diagnóstico</strong></td>
-                    <td><strong>¿Se da solución?</strong></td>
-                    <td>
-                        <table class="sub-table">
-                            <tr>
-                                <td><input type="checkbox" class="checkbox"> Sí</td>
-                                <td><input type="checkbox" class="checkbox"> No</td>
-                            </tr>
-                        </table>
+                    <td style="vertical-align: top; padding-top: 10px;">
+                        <div style="float: left; width: 50%; text-align: left;">
+                            <strong>Folio:</strong> [Aquí va el Folio] <br>
+                            <strong>Área requirente:</strong> [Aquí va el Área requirente]
+                        </div>
+                        <div style="float: right; width: 30%; text-align: left;">
+                            <strong>Fecha:</strong> 20 de enero 2025 <br>
+                            <strong>Hora:</strong> 11:16 am
+                        </div>
+                        <div style="clear: both;"></div> <!-- Limpia los floats -->
                     </td>
+                </tr>
+                
+                <tr>
+                    <td style="height: 1px; border: none;"></td> <!-- Espacio vacío con una altura mínima -->
+                </tr>
+
+                <tr>
+                <td style="vertical-align: top; padding-top: 10px;">
+                        <div style="text-align: left;">
+                            <strong>Tipo de servicio: </strong> [Aquí va el tipo de servicio] <br>
+                        </div>
+                    </td>
+                </tr>
+            </table>          
+        </div>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <td style="vertical-align: top; padding-top: 10px; width:50%;">Descripcion del problema</td>
+                    <td style="vertical-align: top; padding-top: 10px;">Diagnostico</td>
                 </tr>
             </table>
         </div>
-        
+
     </body>
     </html>
 
