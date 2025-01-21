@@ -367,7 +367,8 @@ class Dompdf
     {
         $this->setPhpConfig();
 
-        if (!$this->protocol && !$this->baseHost && !$this->basePath) {
+        if (!$this->protocol && !$this->baseHost && !$this->basePath) 
+        {
             [$this->protocol, $this->baseHost, $this->basePath] = Helpers::explode_url($file);
         }
         $protocol = strtolower($this->protocol);
