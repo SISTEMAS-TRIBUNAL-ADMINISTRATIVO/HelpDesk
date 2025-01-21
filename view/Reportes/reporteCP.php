@@ -16,16 +16,13 @@ if (isset($_SESSION["Enlace"])) {
 
     ob_start();  // Iniciar captura del contenido HTML
 
-    // Ruta de la imagen
-    $imgPath = "../../public/img/Encabezado2025.png";
-    
-    // Verificar si la imagen se carga correctamente
-    $imageData = file_get_contents($imgPath);
-    if ($imageData === false) {
-        echo "Error al leer la imagen.";
-        exit;
-    }
-    $imageData = base64_encode($imageData);  // Codificar imagen a base64
+    // Ruta de la imagen del encabezado
+    $imgHeaderPath = "../../public/img/Encabezado2025.png";
+    $imageHeaderData = base64_encode(file_get_contents($imgHeaderPath));
+
+    // Ruta de la imagen del pie de página
+    $imgFooterPath = "../../public/img/pie-de-pagina.png";
+    $imageFooterData = base64_encode(file_get_contents($imgFooterPath));
 
     ?>
 
@@ -35,8 +32,8 @@ if (isset($_SESSION["Enlace"])) {
         <title>PDF Vacío</title>
         <style>
             body {
-                font-family: 'Calibri', sans-serif;
-                font-size: 12pt;
+                font-family: Arial;
+                font-size: 10pt;
                 margin: 0; 
                 padding: 0;
                 width: 100%;
@@ -56,28 +53,6 @@ if (isset($_SESSION["Enlace"])) {
             }
 
 
-
-            .info {
-                width: 100%;
-                position: relative;
-                margin-top: 5mm; 
-                font-size: 12pt;
-                font-weight: bold;
-            }
-
-            .left{
-                position: absolute;
-                leftt: 0;
-                padding-left: 10mm;
-            }
-
-            .right {
-                text-align: right;
-                margin-right: 20mm;
-            }
-
-
-
             /* Div vacío para simular el espacio antes de la tabla */
             .space {
                 height: 10mm; 
@@ -87,7 +62,7 @@ if (isset($_SESSION["Enlace"])) {
             /* Estilos de la tabla */
             .table-container {
                 width: 100%;
-                margin-top: 15mm;
+                margin-top: 5mm;
                 display: flex;
                 justify-content: center;
             }
@@ -98,151 +73,171 @@ if (isset($_SESSION["Enlace"])) {
             th, td {
                 border: 1px solid #000;
                 padding: 10px;
-                text-align: center;
+                text-align: justify;
                 font-size: 12pt;
-            }
-
-           /* Estilos para casillas de verificación */
-            .checkbox {
-                width: 20px;
-                height: 20px;
             }
 
 
 
 
             .signatures {
-                position: fixed; /* Fija la posición en el pie de página */
-                bottom: 40mm;    /* Margen desde la parte inferior de la página */
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .signatures table {
+                width: 80%;
+                border-collapse: collapse;
+            }
+            .signatures td {
+                vertical-align: top;
+                padding: 26px;
+                text-align: center;
+                border: none; /* Elimina cualquier borde */
+            }
+
+            .signature-line {
+                display: block; /* Hace que el span actúe como un bloque */
+                width: 100%; /* Abarca todo el ancho de la celda */
+                border-top: 1px solid black; /* Línea negra en la parte superior */
+                margin-bottom: 5px; /* Espaciado entre la línea y el texto */
+            }
+
+
+
+            .footer {
+                position: fixed;
+                bottom: 10mm;  /* Se ajusta 10mm por encima del borde de la hoja */
                 left: 0;
                 width: 100%;
                 text-align: center;
-            }
-            .signatures table {
-                width: 90%; /* Asegura que no ocupe todo el ancho */
-                margin: auto;
-            }
-            .signatures td {
-                text-align: center;
-                padding-top: 15mm;
-                font-weight: bold;
+                padding-bottom: 5mm; /* Margen extra si es necesario */
             }
 
+            .footer img {
+                width: 90%; /* Reducir un poco el tamaño para que no sobresalga */
+                height: auto;
+                margin: 0 auto; /* Centrar la imagen */
+            }
+
+
         </style>
+
+        
+
+
     </head>
     <body>
         <!-- Encabezado -->
         <div class="header">
-        <img src="data:image/png;base64,<?php echo $imageData; ?>" alt="Encabezado">
+        <img src="data:image/png;base64,<?php echo $imageHeaderData; ?>" alt="Encabezado">
         </div>
-
-
-        <!-- Información del documento -->
-        <div class="info">
-            <div class="left">Folio: HS-AI:002/2025</div>
-            <div class="right">
-                Fecha: 15/01/2025 <br>
-                Hora: HR
-            </div>
-        </div>
-        
 
         <!-- Espacio vacío de 100mm (10 cm) antes de la tabla -->
         <div class="space"></div>
 
-        <!-- Tabla -->
         <div class="table-container">
             <table>
-
                 <tr>
-                    <td style="vertical-align: top; padding-top: 10px; height: 20%; width: 70%;">Tipo de servicio</td>
-                    <td style="vertical-align: top; padding-top: 10px; width: 40%;">Trabajo realizado</td>
-                </tr>
-
-            </table>
-
-
-            
-        </div>
-
-        <div class="table-container">
-            <table>
-
-                <tr>
-                    <td style="vertical-align: top; padding-top: 10px; width: 50%; height: 20%;">Descripción del problema o solicitud</td>
-                    <td style="width: 50%; height: 20%;"></td>
-                </tr>
-
-            </table>            
-        </div>
-
-        <div class="table-container">
-            <table>
-
-                <tr>
-                    <td style="vertical-align: top; padding-top: 10px; width: 50%; height: 20%;">Diagnóstico</td>
-                    <td style="width: 50%; height: 20%;"></td>
-                </tr>
-
-            </table>            
-        </div>
-
-
-        <div class="table-container">
-            <table>
-
-                <tr>
-                    <td style="width: 50%;">¿Se da solución?</td>
-                    <td style="width: 50%;">
-                        <table class="sub-table">
-                            <tr>
-                                <td style="width: 50%;"><input type="checkbox" class="checkbox"> Sí</td>
-                                <td style="width: 50%;"><input type="checkbox" class="checkbox"> No</td>
-                            </tr>
-                        </table>
+                    <td style="vertical-align: top; padding-top: 10px;">
+                        <div style="float: left; width: 50%; text-align: left;">
+                            <strong>Folio:</strong> [Aquí va el Folio] <br>
+                            <strong>Área requirente:</strong> [Aquí va el Área requirente]
+                        </div>
+                        <div style="float: right; width: 30%; text-align: left;">
+                            <strong>Fecha:</strong> 20 de enero 2025 <br>
+                            <strong>Hora:</strong> 11:16 am
+                        </div>
+                        <div style="clear: both;"></div> <!-- Limpia los floats -->
                     </td>
                 </tr>
+                
+                <tr>
+                    <td style="height: 1px; border: none;"></td> <!-- Espacio vacío con una altura mínima -->
+                </tr>
 
-            </table>            
+                <tr>
+                <td style="vertical-align: top; padding-top: 10px;">
+                        <div style="text-align: left;">
+                            <strong>Tipo de servicio: </strong> [Aquí va el tipo de servicio] <br>
+                        </div>
+                    </td>
+                </tr>
+            </table>          
         </div>
+
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <td>
+                        <strong>Descripción del problema:</strong> <br>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro architecto facere
+                        ipsa dignissimos officiis eos in distinctio repellat aliquid velit nostrum sequi 
+                        vitae esse, necessitatibus accusantium quae error qui doloribus?
+                    </td>
+                    <td>
+                        <strong>Diagnóstico:</strong> <br>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam quaerat 
+                        veritatis excepturi fugit saepe consequatur perferendis, harum ullam rerum 
+                        praesentium reprehenderit nesciunt nihil minima atque eius earum. Officiis, 
+                        consectetur esse.
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div class="table-container">
+            <table>   
+                <tr>
+                <td style="vertical-align: top; padding-top: 10px;">
+                        <div style="text-align: left;">
+                            <strong>Observaciones: </strong> Lorem ipsum dolor sit amet, consectetur 
+                            adipisicing elit. Numquam quaerat veritatis excepturi fugit saepe consequatur
+                            perferendis, harum ullam rerum praesentium reprehenderit nesciunt nihil minima 
+                            atque eius earum. Officiis, consectetur esse. <br>
+                        </div>
+                    </td>
+                </tr>
+            </table>          
+        </div>
+
+
 
 
 
         <!-- Firmas -->
         <div class="signatures">
-            <table>
+            <table style="width: 100%; text-align: center; border-collapse: collapse;">
+                <tr>
+                    <td style="height: 25%; border: none;"></td> <!-- Espacio vacío -->
+                </tr>
                 <!-- Fila de títulos -->
                 <tr>
-                    <td style="vertical-align: top; padding-top: 10px;">
-                        Realizo
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                    </td>
-                    <td style="vertical-align: top; padding-top: 10px;">
-                        Valido
-                    </td>
-                    <td style="vertical-align: top; padding-top: 10px;">
-                        De conformidad
-                    </td>
+                    <td>Realizó</td>
+                    <td>Validó</td>
+                    <td>De conformidad</td>
                 </tr>
-                <!-- Fila de líneas para firma -->
+                <!-- Fila de líneas y nombres -->
                 <tr>
-                    <td style="border-top: 1px solid black; padding-top: 10px;">
-                        Nombre y firma
-                    </td>
-                    <td style="border-top: 1px solid black; padding-top: 10px;">
-                        Nombre y firma
-                    </td>
-                    <td style="border-top: 1px solid black; padding-top: 10px;">
-                        Nombre y firma
-                    </td>
+                    <td><span class="signature-line"></span><br>Nombre y firma</td>
+                    <td><span class="signature-line"></span><br>Nombre y firma</td>
+                    <td><span class="signature-line"></span><br>Nombre y firma</td>
                 </tr>
             </table>
         </div>
-
         
+
+        <!-- Pie de página -->
+        <div class="footer">
+            <img src="data:image/png;base64,<?php echo $imageFooterData; ?>" alt="Pie de página">
+        </div>
+
+
+
+
+
     </body>
     </html>
 
@@ -255,6 +250,11 @@ if (isset($_SESSION["Enlace"])) {
 
     // (Opcional) Configurar el tamaño de la página
     $dompdf->setPaper('A4', 'portrait');
+    
+    // Configurar los márgenes (izquierda, arriba, derecha, abajo)
+    $dompdf->getCanvas()->page_script(function ($canvas) {
+        $canvas->get_cpdf()->setMargins(2.5 * 28.35, 2.5 * 28.35, 2.5 * 28.35, 2.5 * 28.35);
+    });
 
     // Renderizar el PDF
     $dompdf->render();
