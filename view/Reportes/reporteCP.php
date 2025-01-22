@@ -1,26 +1,25 @@
 <?php
 require_once("../../config/conexion.php");
-require_once("../../libs/dompdf/autoload.inc.php");  // Incluir dompdf
+require_once("../../libs/dompdf/autoload.inc.php"); 
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
 if (isset($_SESSION["Enlace"])) {
 
-    // Crear una instancia de Dompdf
+    // Instancia de Dompdf
     $dompdf = new Dompdf();
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
-    $options->set('isPhpEnabled', true);  // Habilitar funciones PHP
+    $options->set('isPhpEnabled', true);  
     $dompdf->setOptions($options);
 
     ob_start();  // Iniciar captura del contenido HTML
 
-    // Ruta de la imagen del encabezado
     $imgHeaderPath = "../../public/img/Encabezado2025.png";
     $imageHeaderData = base64_encode(file_get_contents($imgHeaderPath));
 
-    // Ruta de la imagen del pie de página
+
     $imgFooterPath = "../../public/img/pie-de-pagina.png";
     $imageFooterData = base64_encode(file_get_contents($imgFooterPath));
 
@@ -32,8 +31,8 @@ if (isset($_SESSION["Enlace"])) {
         <title>PDF Vacío</title>
         <style>
             body {
-                font-family: Arial;
-                font-size: 10pt;
+                font-family: Arial, sans-serif;
+                font-size: 10px;
                 margin: 0; 
                 padding: 0;
                 width: 100%;
@@ -45,18 +44,32 @@ if (isset($_SESSION["Enlace"])) {
                 position: relative;
             }
             .header img {
-                width: 100%;  /* Ocupar todo el ancho de la página */
-                height: auto;  /* Mantener proporción */
+                width: 100%;  
+                height: auto; 
             }
             .content {
-                margin: 20mm; /* Márgenes estándar para el contenido del documento */
+                margin: 20mm;
             }
 
 
-            /* Div vacío para simular el espacio antes de la tabla */
-            .space {
-                height: 10mm; 
+            .caption p {
+                font-family: Arial, Sans-serif;
+                text-align: center;    
+                font-size: 10pt;       
+                color: blue;           
+                font-style: italic;    
+                margin-top: 5px;   
             }
+
+            .title h2 {
+                text-align: center;   
+                font-size: 11pt;  
+                font-weight: bold;    
+                text-decoration: underline; 
+                margin-top: 0px;      
+                font-family: Arial, sans-serif; 
+            }
+
 
 
             /* Estilos de la tabla */
@@ -67,14 +80,15 @@ if (isset($_SESSION["Enlace"])) {
                 justify-content: center;
             }
             table {
-                width: 90%; /* Asegura que no ocupe todo el ancho */
+                width: 90%; 
                 margin: auto;
             }
             th, td {
                 border: 1px solid #000;
                 padding: 10px;
                 text-align: justify;
-                font-size: 12pt;
+                font-size: 10pt;
+                font-family: Arial, sans-serif;
             }
 
 
@@ -91,33 +105,33 @@ if (isset($_SESSION["Enlace"])) {
             }
             .signatures td {
                 vertical-align: top;
-                padding: 26px;
+                padding: 35px;
                 text-align: center;
-                border: none; /* Elimina cualquier borde */
+                border: none; 
             }
 
             .signature-line {
-                display: block; /* Hace que el span actúe como un bloque */
-                width: 100%; /* Abarca todo el ancho de la celda */
-                border-top: 1px solid black; /* Línea negra en la parte superior */
-                margin-bottom: 5px; /* Espaciado entre la línea y el texto */
+                display: block; 
+                width: 100%; 
+                border-top: 1px solid black; 
+                margin-bottom: 5px; 
             }
 
 
 
             .footer {
                 position: fixed;
-                bottom: 10mm;  /* Se ajusta 10mm por encima del borde de la hoja */
+                bottom: 10mm;  
                 left: 0;
                 width: 100%;
                 text-align: center;
-                padding-bottom: 5mm; /* Margen extra si es necesario */
+                padding-bottom: 5mm; 
             }
 
             .footer img {
-                width: 90%; /* Reducir un poco el tamaño para que no sobresalga */
+                width: 100%; 
                 height: auto;
-                margin: 0 auto; /* Centrar la imagen */
+                margin: 0 auto; 
             }
 
 
@@ -133,35 +147,50 @@ if (isset($_SESSION["Enlace"])) {
         <img src="data:image/png;base64,<?php echo $imageHeaderData; ?>" alt="Encabezado">
         </div>
 
-        <!-- Espacio vacío de 100mm (10 cm) antes de la tabla -->
-        <div class="space"></div>
+        <div class="caption">
+            <p>Aquí debe llevar una variable para la leyenda del año vigente: </p>
+        </div>
+
+        <div class="title">
+            <h2>ACUSE DE SERVICIO</h2>
+        </div>
 
         <div class="table-container">
             <table>
+
                 <tr>
                     <td style="vertical-align: top; padding-top: 10px;">
                         <div style="float: left; width: 50%; text-align: left;">
                             <strong>Folio:</strong> [Aquí va el Folio] <br>
                             <strong>Área requirente:</strong> [Aquí va el Área requirente]
                         </div>
-                        <div style="float: right; width: 30%; text-align: left;">
+                        <div style="float: right; width: 32%; text-align: left;">
                             <strong>Fecha:</strong> 20 de enero 2025 <br>
                             <strong>Hora:</strong> 11:16 am
                         </div>
-                        <div style="clear: both;"></div> <!-- Limpia los floats -->
+                        <div style="clear: both;"></div> 
                     </td>
                 </tr>
                 
                 <tr>
-                    <td style="height: 1px; border: none;"></td> <!-- Espacio vacío con una altura mínima -->
+                    <td style="height: 1px; border: none;"></td>
                 </tr>
 
+
                 <tr>
-                <td style="vertical-align: top; padding-top: 10px;">
-                        <div style="text-align: left;">
-                            <strong>Tipo de servicio: </strong> [Aquí va el tipo de servicio] <br>
+                    <td style="vertical-align: top; padding-top: 10px;">
+                        <div style="float: left; width: 50%; text-align: left;">
+                            <strong>Tipo de servicio:</strong> [Aquí va el tipo de servicio]
                         </div>
+                        <div style="float: right; width: 32%; text-align: left;">
+                            <strong>¿Se da solucion?</strong> Si <br>
+                        </div>
+                        <div style="clear: both;"></div> 
                     </td>
+                </tr>
+                
+                <tr>
+                    <td style="height: 1px; border: none;"></td>
                 </tr>
             </table>          
         </div>
@@ -203,15 +232,11 @@ if (isset($_SESSION["Enlace"])) {
             </table>          
         </div>
 
-
-
-
-
         <!-- Firmas -->
         <div class="signatures">
             <table style="width: 100%; text-align: center; border-collapse: collapse;">
                 <tr>
-                    <td style="height: 25%; border: none;"></td> <!-- Espacio vacío -->
+                    <td style="height: 25%; border: none;"></td> 
                 </tr>
                 <!-- Fila de títulos -->
                 <tr>
@@ -221,9 +246,9 @@ if (isset($_SESSION["Enlace"])) {
                 </tr>
                 <!-- Fila de líneas y nombres -->
                 <tr>
-                    <td><span class="signature-line"></span><br>Nombre y firma</td>
-                    <td><span class="signature-line"></span><br>Nombre y firma</td>
-                    <td><span class="signature-line"></span><br>Nombre y firma</td>
+                    <td><span class="signature-line"></span><br>Nombre y firma <br><strong>Cargo</strong></td>
+                    <td><span class="signature-line"></span><br>Nombre y firma <br><strong>Cargo</strong></td>
+                    <td><span class="signature-line"></span><br>Nombre y firma <br><strong>Cargo</strong></td>
                 </tr>
             </table>
         </div>
@@ -234,10 +259,6 @@ if (isset($_SESSION["Enlace"])) {
             <img src="data:image/png;base64,<?php echo $imageFooterData; ?>" alt="Pie de página">
         </div>
 
-
-
-
-
     </body>
     </html>
 
@@ -245,25 +266,24 @@ if (isset($_SESSION["Enlace"])) {
 
     $html = ob_get_clean();  // Obtener el contenido HTML capturado
 
-    // Cargar el contenido HTML en dompdf
     $dompdf->loadHtml($html);
 
-    // (Opcional) Configurar el tamaño de la página
     $dompdf->setPaper('A4', 'portrait');
     
-    // Configurar los márgenes (izquierda, arriba, derecha, abajo)
     $dompdf->getCanvas()->page_script(function ($canvas) {
-        $canvas->get_cpdf()->setMargins(2.5 * 28.35, 2.5 * 28.35, 2.5 * 28.35, 2.5 * 28.35);
+        // Asegurándonos de usar centímetros
+        $canvas->get_cpdf()->setMargins(30, 25, 25, 30); 
     });
-
+    
+    
     // Renderizar el PDF
     $dompdf->render();
 
     // Enviar el PDF al navegador
-    $dompdf->stream("pdf_vacio.pdf", array("Attachment" => 0));  // 0 = Mostrar en el navegador
+    $dompdf->stream("pdf_vacio.pdf", array("Attachment" => 0));  
 
 } else {
-    $conexion = new Conectar(); // Crear una instancia de la clase Conectar
+    $conexion = new Conectar();
     header("Location:" . $conexion->rutaHelpdesk() . "index.php");
 }
 ?>
