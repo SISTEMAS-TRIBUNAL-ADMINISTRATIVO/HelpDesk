@@ -5,21 +5,18 @@ require_once("../../libs/dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-
-
 $options = new Options();
 $options->set('isHtml5ParserEnabled', true);
 $options->set('isPhpEnabled', true);  
 $dompdf = new Dompdf($options);
 
-
-function loadBase64Image($path) {
+function loadBase64Image($path) 
+{
     return base64_encode(file_get_contents($path));
 }
 
 $imageHeaderData = loadBase64Image("../../public/img/Encabezado2025.png");
 $imageFooterData = loadBase64Image("../../public/img/pie-de-pagina.png");
-
 
 ob_start();  // Iniciar captura del contenido HTML
 
@@ -86,8 +83,6 @@ ob_start();  // Iniciar captura del contenido HTML
             text-align: justify;
             font-size: 10pt;
         }
-
-
 
 
         .signatures {

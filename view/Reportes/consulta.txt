@@ -1,0 +1,27 @@
+SELECT 
+	leyenda,
+	encabezado,
+	pie_pagina
+FROM cat_generales
+
+
+
+SELECT
+	cat_id,
+	area_crea,
+	DATE_FORMAT(fech_crea, '%W %d de %M de %Y') AS fecha_crea,
+	TIME(fech_crea) AS hora,
+	cat_nombre,
+	se_da_solucion,
+	tick_descrip,
+	diagnostico,
+	observaciones,
+	nombre_realizo,
+	cargo_realizo,
+	nombre_valido,
+	cargo_valido,
+	nombre_conformidad,
+	cargo_conformidad
+FROM tm_ticket
+INNER JOIN tm_categoria ON cat_id = 
+WHERE tick_id=1
