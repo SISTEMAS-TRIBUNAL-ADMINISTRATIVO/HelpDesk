@@ -49,14 +49,32 @@ ob_start();  // Iniciar captura del contenido HTML
             width: 100%;
             height: 100%;
         }
-        .header, .footer {
+        .header{
             width: 100%;
             text-align: center;
         }
-        .header img, .footer img {
+        .header img {
             width: 100%;
             height: auto;
         }
+        
+        .footer {
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 10mm; /* Mueve el pie de página 10mm hacia arriba */
+            margin: 0;
+        }
+
+        .footer img {
+            width: 100%;
+            height: auto;
+        }
+
+
+
+
+
         .content {
             margin: 20mm;
         }
@@ -75,23 +93,81 @@ ob_start();  // Iniciar captura del contenido HTML
             font-weight: bold;    
             text-decoration: underline; 
             margin-top: 0;      
-
         }
 
-
-
-        /* Estilos de la tabla */
-        .table-container {
+        .table-container-descripcion {
             width: 100%;
             margin-top: 5mm;
             display: flex;
             justify-content: center;
         }
-        table {
-            width: 90%; 
+        .table-container-descripcion table {
+            width: 90%;
             margin: auto;
         }
-        th, td {
+        .table-container-descripcion th, .table-container-descripcion td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: justify;
+            font-size: 10pt;
+        }
+
+        .table-container-diagnostico {
+            width: 100%;
+            margin-top: 5mm;
+            display: flex;
+            justify-content: center;
+        }
+
+        .table-container-diagnostico table {
+            width: 90%;
+            margin: auto;
+        }
+
+        .table-container-diagnostico th, .table-container-diagnostico td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: justify;
+            font-size: 10pt;
+            vertical-align: top;
+        }
+
+        .table-container-diagnostico td {
+            width: 45%; 
+            height: 150px; 
+            overflow: auto; 
+            word-wrap: break-word; 
+            line-height: 1.4; 
+        }
+
+
+        .table-container-diagnostico td strong {
+            display: block;
+            margin-bottom: 2px; 
+            line-height: 1.2; 
+            margin-top: 0; 
+        }
+
+
+        .table-container-diagnostico td br {
+            display: none; 
+        }
+
+
+    
+
+
+        .table-container-observaciones {
+            width: 100%;
+            margin-top: 5mm;
+            display: flex;
+            justify-content: center;
+        }
+        .table-container-observaciones table {
+            width: 90%;
+            margin: auto;
+        }
+        .table-container-observaciones th, .table-container-observaciones td {
             border: 1px solid #000;
             padding: 10px;
             text-align: justify;
@@ -99,28 +175,62 @@ ob_start();  // Iniciar captura del contenido HTML
         }
 
 
+
+
         .signatures {
             width: 100%;
             display: flex;
             justify-content: center;
         }
+
         .signatures table {
             width: 100%;
             border-collapse: collapse;
-        }
-        .signatures td {
-            vertical-align: top;
-            padding: 40px;
-            text-align: center;
-            border: none; 
         }
 
         .signature-line {
             display: block; 
             width: 100%; 
             border-top: 1px solid black; 
-            margin-bottom: 5px; 
+            margin-bottom: 8px; 
         }
+
+        .signatures td {
+            vertical-align: top;
+            padding: 25px; 
+            text-align: center;
+            border: none;
+            width: 33.33%; 
+        }
+
+        .nombre {
+            font-size: 12px;
+            font-weight: bold;
+            display: block;
+            max-width: 160px; 
+            margin: 0 auto;
+            white-space: normal;
+            word-wrap: break-word;
+            overflow: hidden;
+            line-height: 1.2;
+            height: 2.4em;
+        }
+
+
+        .cargo {
+            font-size: 10px;
+            display: block;
+            max-width: 160px;
+            margin: 0 auto;
+            white-space: normal; 
+            word-wrap: break-word;
+            overflow: hidden;
+            line-height: 1.2;
+            min-height: 1.2em; 
+            max-height: 2.4em; 
+            text-transform: uppercase;
+        }
+
     </style>
 
     
@@ -128,124 +238,132 @@ ob_start();  // Iniciar captura del contenido HTML
 </head>
 
 <?php
-    $reporte-> get_setear_fecha();
-    $DatosTick = $reporte-> get_reporte_ticket(1);
-    
-    foreach($DatosTick as $ReporteTick)
-    {
-    ?>
-        <body>
-        <!-- Encabezado -->
-        <div class="header">
-            <img src="data:image/png;base64,<?php echo $imageHeaderData; ?>" alt="Encabezado">
-        </div>
-    
-        <div class="caption">
-            <p> <?php echo $Leyenda ?> </p>
-        </div>
-    
-        <div class="title">
-            <h2>ACUSE DE SERVICIO</h2>
-        </div>
-    
-        <div class="table-container">
-            <table>
-    
-                <tr>
-                    <td style="vertical-align: top; padding-top: 10px;">
-                        <div style="float: left; width: 50%; text-align: left;">
-                            <strong>Folio:</strong> <?php echo $ReporteTick["cat_id"] ?> <br>
-                            <strong>Área requirente:</strong> <?php echo $ReporteTick["area_crea"] ?>
-                        </div>
-                        <div style="float: right; width: 32%; text-align: left;">
-                            <strong>Fecha:</strong> <?php echo $ReporteTick["fecha_crea"] ?> <br>
-                            <strong>Hora:</strong> <?php echo $ReporteTick["hora"] ?>
-                        </div>
-                        <div style="clear: both;"></div> 
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td style="height: 1px; border: none;"></td>
-                </tr>
-    
-    
-                <tr>
-                    <td style="vertical-align: top; padding-top: 10px;">
-                        <div style="float: left; width: 50%; text-align: left;">
-                            <strong>Tipo de servicio:</strong> <?php echo $ReporteTick["cat_nom"] ?>
-                        </div>
-                        <div style="float: right; width: 32%; text-align: left;">
-                            <strong>¿Se da solucion?</strong> <?php echo $ReporteTick["se_da_solucion"] ?> <br>
-                        </div>
-                        <div style="clear: both;"></div> 
-                    </td>
-                </tr>
-                
-            </table>          
-        </div>
-    
-    
-        <div class="table-container">
-            <table>
-                <tr>
-                    <td>
-                        <strong>Descripción del problema:</strong> <br>
-                        <?php echo $ReporteTick["tick_descrip"] ?>
-                    </td>
-                    <td>
-                        <strong>Diagnóstico:</strong> <br>
-                        <?php echo $ReporteTick["diagnostico"] ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    
-    
-        <div class="table-container">
-            <table>   
-                <tr>
+$reporte-> get_setear_fecha();
+$DatosTick = $reporte-> get_reporte_ticket(1);
+
+foreach($DatosTick as $ReporteTick)
+{
+?>
+    <body>
+    <!-- Encabezado -->
+    <div class="header">
+        <img src="data:image/png;base64,<?php echo $imageHeaderData; ?>" alt="Encabezado">
+    </div>
+
+    <div class="caption">
+        <p> <?php echo $Leyenda ?> </p>
+    </div>
+
+    <div class="title">
+        <h2>ACUSE DE SERVICIO</h2>
+    </div>
+
+    <div class="table-container-descripcion">
+        <table>
+            <tr>
                 <td style="vertical-align: top; padding-top: 10px;">
-                        <div style="text-align: left;">
-                            <strong>Observaciones: </strong> 
-                            <?php echo $ReporteTick["observaciones"] ?>
-                            <br>
-                        </div>
-                    </td>
-                </tr>
-            </table>          
-        </div>
+                    <div style="float: left; width: 50%; text-align: left;">
+                        <strong>Folio:</strong> <?php echo $ReporteTick["cat_id"] ?> <br>
+                        <strong>Área requirente:</strong> <?php echo $ReporteTick["area_crea"] ?>
+                    </div>
+                    <div style="float: right; width: 32%; text-align: left;">
+                        <strong>Fecha:</strong> <?php echo $ReporteTick["fecha_crea"] ?> <br>
+                        <strong>Hora:</strong> <?php echo $ReporteTick["hora"] ?>
+                    </div>
+                    <div style="clear: both;"></div> 
+                </td>
+            </tr>
+            
+            <tr>
+                <td style="height: 1px; border: none;"></td>
+            </tr>
+
+            <tr>
+                <td style="vertical-align: top; padding-top: 10px;">
+                    <div style="float: left; width: 50%; text-align: left;">
+                        <strong>Tipo de servicio:</strong> <?php echo $ReporteTick["cat_nom"] ?>
+                    </div>
+                    <div style="float: right; width: 32%; text-align: left;">
+                        <strong>¿Se da solucion?</strong> <?php echo $ReporteTick["se_da_solucion"] ?> <br>
+                    </div>
+                    <div style="clear: both;"></div> 
+                </td>
+            </tr>
+        </table>          
+    </div>
+
+    <div class="table-container-diagnostico">
+        <table>
+            <tr>
+                <td>
+                    <strong>Descripción del problema:</strong>
+                    <?php echo $ReporteTick["tick_descrip"] ?>
+                </td>
+                <td>
+                    <strong>Diagnóstico:</strong>
+                    <?php echo $ReporteTick["diagnostico"] ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="table-container-observaciones">
+        <table>   
+            <tr>
+                <td style="vertical-align: top; padding-top: 10px;">
+                    <div style="text-align: left;">
+                        <strong>Observaciones: </strong> 
+                        <?php echo $ReporteTick["observaciones"] ?>
+                        <br>
+                    </div>
+                </td>
+            </tr>
+        </table>          
+    </div>
+
+
+    <!-- Firmas -->
+    <div class="signatures">
+        <table style="width: 100%; text-align: center; border-collapse: collapse;">
+            <tr>
+                <td style="height: 10%; border: none;"></td> 
+            </tr>
+            <!-- Fila de títulos -->
+            <tr>
+                <td>Realizó</td>
+                <td>Validó</td>
+                <td>De conformidad</td>
+            </tr>
+            <!-- Fila de líneas y nombres -->
+            <tr>
+                <td>
+                    <span class="signature-line"></span><br>
+                    <span class="nombre"> <?php echo $ReporteTick["nombre_realizo"] ?> </span><br>
+                    <strong class="cargo"> <?php echo $ReporteTick["cargo_realizo"] ?> </strong>
+                </td>
+                <td>
+                    <span class="signature-line"></span><br>
+                    <span class="nombre"> <?php echo $ReporteTick["nombre_valido"] ?> </span><br>
+                    <strong class="cargo"> <?php echo $ReporteTick["cargo_valido"] ?> </strong>
+                </td>
+                <td>
+                    <span class="signature-line"></span><br>
+                    <span class="nombre"> <?php echo $ReporteTick["nombre_conformidad"] ?> </span><br>
+                    <strong class="cargo"> <?php echo $ReporteTick["cargo_conformidad"] ?> </strong>
+                </td>
+            </tr>
+        </table>
+    </div>
     
-        <!-- Firmas -->
-        <div class="signatures">
-            <table style="width: 100%; text-align: center; border-collapse: collapse;">
-                <tr>
-                    <td style="height: 10%; border: none;"></td> 
-                </tr>
-                <!-- Fila de títulos -->
-                <tr>
-                    <td>Realizó</td>
-                    <td>Validó</td>
-                    <td>De conformidad</td>
-                </tr>
-                <!-- Fila de líneas y nombres -->
-                <tr>
-                    <td><span class="signature-line"></span><br> <?php echo $ReporteTick["nombre_realizo"] ?> <br><strong> <?php echo $ReporteTick["cargo_realizo"] ?> </strong></td>
-                    <td><span class="signature-line"></span><br> <?php echo $ReporteTick["nombre_valido"] ?> <br><strong> <?php echo $ReporteTick["cargo_valido"] ?> </strong></td>
-                    <td><span class="signature-line"></span><br> <?php echo $ReporteTick["nombre_conformidad"] ?> <br><strong> <?php echo $ReporteTick["cargo_conformidad"] ?> </strong></td>
-                </tr>
-            </table>
-        </div>
-        
-    
-        <!-- Pie de página -->
-        <div class="footer">
-            <img src="data:image/png;base64,<?php echo $imageFooterData; ?>" alt="Pie de página">
-        </div>
-    
-    </body>
-    <?php
-    }
+
+    <!-- Pie de página -->
+    <div class="footer">
+        <img src="data:image/png;base64,<?php echo $imageFooterData; ?>" alt="Pie de página">
+    </div>
+
+</body>
+<?php
+}
 ?>
 
 </html>
@@ -259,7 +377,7 @@ $dompdf->setPaper('A4', 'portrait');
 
 $dompdf->getCanvas()->page_script(function ($canvas) {
     // Asegurándonos de usar centímetros
-    $canvas->get_cpdf()->setMargins(30, 25, 25, 30); 
+    $canvas->get_cpdf()->setMargins(20, 20, 30, 50); 
 });
 // Renderizar el PDF
 $dompdf->render();

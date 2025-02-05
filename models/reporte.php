@@ -24,7 +24,7 @@
                     T.cargo_conformidad
                 FROM tm_ticket T
                 INNER JOIN tm_categoria C ON C.cat_id = T.cat_id
-                WHERE tick_id=?";
+                WHERE tick_id=16";
 
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idTicket);
