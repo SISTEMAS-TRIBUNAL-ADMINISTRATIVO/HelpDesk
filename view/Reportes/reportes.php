@@ -112,46 +112,12 @@ ob_start();  // Iniciar captura del contenido HTML
             font-size: 10pt;
         }
 
-        .table-container-diagnostico {
-            width: 100%;
-            margin-top: 5mm;
-            display: flex;
-            justify-content: center;
-        }
-
-        .table-container-diagnostico table {
-            width: 90%;
-            margin: auto;
-        }
-
-        .table-container-diagnostico th, .table-container-diagnostico td {
-            border: 1px solid #000;
-            padding: 5px;
-            text-align: justify;
-            font-size: 10pt;
-            vertical-align: top;
-        }
-
-        .table-container-diagnostico td {
-            width: 45%; 
-            height: 150px; 
-            overflow: auto; 
-            word-wrap: break-word; 
-            line-height: 1.4; 
-        }
 
 
-        .table-container-diagnostico td strong {
-            display: block;
-            margin-bottom: 2px; 
-            line-height: 1.2; 
-            margin-top: 0; 
-        }
 
 
-        .table-container-diagnostico td br {
-            display: none; 
-        }
+
+
 
 
     
@@ -172,7 +138,10 @@ ob_start();  // Iniciar captura del contenido HTML
             padding: 10px;
             text-align: justify;
             font-size: 10pt;
+            height: 100px;
         }
+
+
 
 
 
@@ -231,6 +200,64 @@ ob_start();  // Iniciar captura del contenido HTML
             text-transform: uppercase;
         }
 
+
+        .table-container-desc-problema {
+            width: 100%;
+            margin-top: 10mm; 
+            display: flex;
+            justify-content: center;
+        }
+
+        .table-container-desc-problema table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse; 
+        }
+
+        .table-container-desc-problema th, .table-container-desc-problema td {
+            border: 1px solid #000; 
+            padding: 8px; 
+            text-align: left; 
+            font-size: 10pt; 
+        }
+
+        .table-container-desc-problema td {
+            background-color: #f9f9f9; 
+        }
+
+
+        
+        .table-container-diagnostico {
+            width: 100%;
+            margin-top: 10mm; /* Espacio entre las tablas */
+            display: flex;
+            justify-content: center;
+        }
+
+        .table-container-diagnostico table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse; /* Para que las celdas compartan bordes */
+        }
+
+        .table-container-diagnostico th, .table-container-diagnostico td {
+            border: 1px solid #000; /* Bordes de las celdas */
+            padding: 8px; /* Espacio interno de las celdas */
+            text-align: left; /* Alineación del texto */
+            font-size: 10pt; /* Tamaño de fuente */
+        }
+
+        .table-container-diagnostico td {
+            background-color: #f9f9f9; /* Color de fondo de las celdas */
+        }
+
+
+
+
+
+
+
+
     </style>
 
     
@@ -239,7 +266,7 @@ ob_start();  // Iniciar captura del contenido HTML
 
 <?php
 $reporte-> get_setear_fecha();
-$DatosTick = $reporte-> get_reporte_ticket(1);
+$DatosTick = $reporte-> get_reporte_ticket(16);
 
 foreach($DatosTick as $ReporteTick)
 {
@@ -292,34 +319,44 @@ foreach($DatosTick as $ReporteTick)
         </table>          
     </div>
 
-    <div class="table-container-diagnostico">
+
+    <div class="table-container-desc-problema">
         <table>
             <tr>
                 <td>
                     <strong>Descripción del problema:</strong>
-                    <?php echo $ReporteTick["tick_descrip"] ?>
-                </td>
-                <td>
-                    <strong>Diagnóstico:</strong>
-                    <?php echo $ReporteTick["diagnostico"] ?>
+                    <?php echo $ReporteTick["tick_descrip"]; ?>
                 </td>
             </tr>
         </table>
     </div>
 
+    <div class="table-container-diagnostico">
+        <table>
+            <tr>
+                <td>
+                    <strong>Diagnóstico:</strong>
+                    <?php echo $ReporteTick["diagnostico"]; ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
     <div class="table-container-observaciones">
         <table>   
             <tr>
                 <td style="vertical-align: top; padding-top: 10px;">
-                    <div style="text-align: left;">
-                        <strong>Observaciones: </strong> 
-                        <?php echo $ReporteTick["observaciones"] ?>
+                    <div class="observaciones-texto">
+                        <strong>Observaciones: </strong> <br> 
+                        <?php echo $ReporteTick["observaciones"]; ?>
                         <br>
                     </div>
                 </td>
             </tr>
         </table>          
-    </div>
+    </div>   
 
 
     <!-- Firmas -->
