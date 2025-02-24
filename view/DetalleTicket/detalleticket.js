@@ -163,39 +163,52 @@ $(document).on("click","#btnenviar", function(){  //Botones de abvertencia de la
     });
 });
 
-$(document).on("click","#btncerrarticket", function(){  //Boton para cerrar el detalle ticket 
-    swal({
-        title: "HelpDesk",
-        text: "Esta seguro de Cerrar el Ticket?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-warning",
-        confirmButtonText: "Si",
-        cancelButtonText: "No",
-        closeOnConfirm: false
-    },
-    function(isConfirm) { //comfirmacion para cerrar el ticket 
-        if (isConfirm) {
-            var tick_id = getUrlParameter('ID');
-            var usu_id = $('#user_idx').val();
-            $.post("../../controller/ticket.php?op=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
+// $(document).on("click","#btncerrarticket", function(){  //Boton para cerrar el detalle ticket 
+//     swal({
+//         title: "HelpDesk",
+//         text: "Esta seguro de Cerrar el Ticket?",
+//         type: "warning",
+//         showCancelButton: true,
+//         confirmButtonClass: "btn-warning",
+//         confirmButtonText: "Si",
+//         cancelButtonText: "No",
+//         closeOnConfirm: false
+//     },
+//     function(isConfirm) { //comfirmacion para cerrar el ticket 
+//         if (isConfirm) {
+//             var tick_id = getUrlParameter('ID');
+//             var usu_id = $('#user_idx').val();
+//             $.post("../../controller/ticket.php?op=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
 
-            });
+//             });
 
-            listardetalle(tick_id);
+//             listardetalle(tick_id);
 
-            swal({
-                title: "HelpDesk!",
-                text: "Ticket Cerrado correctamente.",
-                type: "success",
-                confirmButtonClass: "btn-success"
-            }, function () {
-                console.log("Redirigiendo")
-                window.location.href = "../Reportes/reportes.php";
-            });
-        }
+//             swal({
+//                 title: "HelpDesk!",
+//                 text: "Ticket Cerrado correctamente.",
+//                 type: "success",
+//                 confirmButtonClass: "btn-success"
+//             }, function () {
+//                 console.log("Redirigiendo")
+//                 window.location.href = "../Reportes/reportes.php";
+//             });
+//         }
+//     });
+// });
+
+
+$(document).on("click","#btncerrarticket", function(){
+    // Función que se ejecuta cuando se presiona el botón Cerrar Ticket
+    $("#btncerrarticket").on('click', function(event) {
+        event.preventDefault(); // Evita que el comportamiento predeterminado del botón ocurra
+        // Aquí se llama al modal sin la ventana de confirmación
+        $("#modaldetalle").modal('show');
     });
 });
+
+
+
 
 $(document).on("click","#btnchatgpt", function(){
     var tick_id = getUrlParameter('ID');

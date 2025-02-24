@@ -124,6 +124,7 @@ if (isset($_SESSION["Enlace"])) {
                     ?>
                       <!-- <button type="button" id="btnchatgpt" class="btn btn-rounded btn-inline btn-success">ChatGpt</button> -->
                       <button type="button" id="btncerrarticket" class="btn btn-rounded btn-inline btn-warning">Cerrar Ticket</button>
+
                     <?php
                   }
                 ?>
@@ -138,6 +139,8 @@ if (isset($_SESSION["Enlace"])) {
     <?php require_once("../MainJs/js.php"); ?>
 
     <?php require_once("../ConsultarTicket/modalasignar.php");?>
+    <?php require_once("modaldetalle.php"); ?>
+
 
     <script type="text/javascript" src="detalleticket.js"></script>
 
